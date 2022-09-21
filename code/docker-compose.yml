@@ -1,41 +1,41 @@
 version: '3.7'
 services:
- agem-dev-db:
+ parqueo-dev-db:
   image: mysql:5.7
   environment:
    MYSQL_ROOT_PASSWORD: Igss.2022
-   MYSQL_DATABASE: agem_dev
+   MYSQL_DATABASE: parqueo_dev
    MYSQL_USER: usr_laravel
    MYSQL_PASSWORD: Usr.igss.2022
   ports:
-   - 33079:3306
+   - 33077:3306
   volumes:
    - ./database/schemas/:/var/lib/mysql
   networks:
-   agem_dev_net:
-    ipv4_address: 173.23.100.19
- agem-dev-1:
+   parqueo_dev_net:
+    ipv4_address: 173.27.100.19
+ parqueo-dev:
   build:
    context: ./
    dockerfile: Dockerfile
   ports:
-   - 8900:80
+   - 8700:80
   volumes:
    - ./code-dev:/var/www
    - ./code-dev/public:/var/www/html
   networks:
-   agem_dev_net:
-    ipv4_address: 173.23.100.20
+   parqueo_dev_net:
+    ipv4_address: 173.27.100.20
   depends_on:
-   - agem-dev-db
+   - parqueo-dev-db
 volumes:
  code-dev:
  database:
 networks:
- agem_dev_net:
+ parqueo_dev_net:
   driver: bridge
   ipam:
    driver: default
    config:
     -
-     subnet: 173.23.100.0/24
+     subnet: 173.27.100.0/24
